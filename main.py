@@ -1,5 +1,6 @@
 from quiz_data import get_default_quizzes
-
+from quiz import Quiz
+from quiz_data import get_default_quizzes
 
 def show_menu():
     print("\n========================================")
@@ -61,6 +62,31 @@ def play_quiz(quizzes):
     print(f"결과: {total}문제 중 {score}문제 정답! ({percentage}점)")
     print("========================================")
 
+def add_quiz(quizzes):
+    print("\n새로운 퀴즈를 추가합니다.")
+
+    while True:
+        question = input("문제를 입력하세요: ").strip()
+        if question:
+            break
+        print("문제는 비워둘 수 없습니다.")
+
+    choices = []
+
+    for number in range(1, 5):
+        while True:
+            choice = input(f"선택지 {number}: ").strip()
+
+            if choice:
+                choices.append(choice)
+                break
+
+            print("선택지는 비워둘 수 없습니다.")
+
+    answer = get_number("정답 번호 (1~4): ", 1, 4)
+
+    quizzes.append(Quiz(question, choices, answer))
+    print("퀴즈가 추가되었습니다!")
 
 def main():
     quizzes = get_default_quizzes()
@@ -72,6 +98,8 @@ def main():
 
             if number == 1:
                 play_quiz(quizzes)
+            elif number == 2:
+                add_quiz(quizzes)
             elif number == 5:
                 print("게임을 종료합니다.")
                 break
