@@ -1,0 +1,27 @@
+﻿8aa3e53 Docs: address AI evaluation feedback and add performance test
+54352dc Test: record quiz play with hint penalty
+2d736e2 Docs: add bonus feature screenshots
+dd638d0 Docs: update README with bonus features
+50b30aa Feat: save and display quiz score history
+49cd42e Feat: implement quiz deletion with confirmation
+7d9e2a6 Feat: implement quiz hints and score penalties
+1b5e27c Feat: allow users to select quiz question count
+92007db Feat: randomize quiz question order
+a6006db Docs: fix screenshot file extensions
+c8ee66a Docs: add project screenshots
+9f55305 Data: finalize nine Python quizzes and best score
+d4277a8 Data: replace test quizzes with Python questions
+ad39932 Docs: verify Git clone and program execution
+69ba93b Docs: complete project README and usage guide
+5528599 Refactor: organize game features into QuizGame class
+77516be Feat: implement JSON persistence for quizzes and scores
+837c5b8 Feat: implement best score tracking and display
+eb02a1b Feat: implement quiz list display
+56c7b1b Feat: implement quiz registration and input validation
+d49c632 Feat: implement quiz play and score calculation
+6af77b8 Feat: add five default Python quizzes
+f4ae15a Feat: implement Quiz class and answer validation
+f692a52 Merge: integrate GitHub initial commit
+493a269 Feat: implement main menu and input validation
+10d3036 Chore: initialize Python quiz game project
+96be1b9 Initial commit

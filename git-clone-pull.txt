@@ -1,0 +1,18 @@
+﻿Git Clone/Pull Verification
+
+Repository: https://github.com/hats0601-dev/E1-2.git
+
+Clone command:
+git clone https://github.com/hats0601-dev/E1-2.git E1-2-evaluation
+
+Clone verification:
+https://github.com/hats0601-dev/E1-2.git
+
+Pull command:
+git -C ..\E1-2-evaluation pull origin main
+
+Pull verification:
+## main...origin/main
+
+Latest commit:
+8aa3e53 Docs: address AI evaluation feedback and add performance test
