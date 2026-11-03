@@ -114,36 +114,12 @@ def show_best_score(best_score):
     else:
         print(f"\n최고 점수: {best_score}점")
 
+from quiz_game import QuizGame
+
+
 def main():
-    quizzes, best_score = load_state()
-
-    try:
-        while True:
-            show_menu()
-            number = get_number("선택: ", 1, 5)
-
-            if number == 1:
-                best_score = play_quiz(quizzes, best_score)
-                save_state(quizzes, best_score)
-
-            elif number == 2:
-                add_quiz(quizzes)
-                save_state(quizzes, best_score)
-
-            elif number == 3:
-                show_quiz_list(quizzes)
-
-            elif number == 4:
-                show_best_score(best_score)
-
-            elif number == 5:
-                save_state(quizzes, best_score)
-                print("게임을 종료합니다.")
-                break
-
-    except (KeyboardInterrupt, EOFError):
-        save_state(quizzes, best_score)
-        print("\n데이터를 저장하고 안전하게 게임을 종료합니다.")
+    game = QuizGame()
+    game.run()
 
 
 if __name__ == "__main__":
