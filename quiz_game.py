@@ -19,6 +19,7 @@ class QuizGame:
         print("3. 퀴즈 목록")
         print("4. 점수 확인")
         print("5. 종료")
+        print("6. 퀴즈 삭제")
         print("========================================")
 
     def get_number(self, prompt, minimum, maximum):
@@ -163,11 +164,43 @@ class QuizGame:
         else:
             print(f"\n최고 점수: {self.best_score}점")
 
+    def delete_quiz(self):
+        if not self.quizzes:
+            print("\n삭제할 퀴즈가 없습니다.")
+            return
+
+        self.show_quiz_list()
+
+        number = self.get_number(
+            f"삭제할 퀴즈 번호 (1~{len(self.quizzes)}): ",
+            1,
+            len(self.quizzes)
+        )
+
+        quiz = self.quizzes[number - 1]
+
+        confirm = input(
+            f"'{quiz.question}' 문제를 삭제하시겠습니까? (y/N): "
+        ).strip().lower()
+
+        if confirm != "y":
+            print("삭제를 취소했습니다.")
+            return
+
+        removed_quiz = self.quizzes.pop(number - 1)
+
+        if self.save():
+            print("퀴즈가 삭제되었습니다.")
+        else:
+            self.quizzes.insert(number - 1, removed_quiz)
+            print("저장에 실패하여 삭제를 취소했습니다.")
+
+
     def run(self):
         try:
             while True:
                 self.show_menu()
-                number = self.get_number("선택: ", 1, 5)
+                number = self.get_number("선택: ", 1, 6)
 
                 if number == 1:
                     self.play_quiz()
@@ -185,6 +218,9 @@ class QuizGame:
                     self.save()
                     print("게임을 종료합니다.")
                     break
+
+                elif number == 6:
+                    self.delete_quiz()
 
         except (KeyboardInterrupt, EOFError):
             self.save()
