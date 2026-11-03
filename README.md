@@ -316,19 +316,7 @@ GitHub 저장소를 별도 폴더에 복제하고 프로그램이 정상 실행�
 
 ## 11. Git 커밋 관리 규칙
 
-기능별 변경 이력을 추적하고 문제 발생 시 수정 내용을 쉽게 확인하기 위해 작업 단위별로 커밋했습니다.
-
-## 12. Git 작업 증빙
-
-### 1) 원격 저장소 및 커밋 기록
-
-원격 저장소: https://github.com/hats0601-dev/E1-2.git
-
-Git 명령어로 확인한 전체 커밋 수는 27개입니다.
-
-```powershell
-git rev-list --count HEAD
-git log --all --oneline
+기능별 변경 이력을 추적하기 위해 작업 단위별로 커밋했습니다.
 
 ### 커밋 단위
 
@@ -343,7 +331,7 @@ git log --all --oneline
 - `Feat`: 새로운 기능 구현
 - `Fix`: 오류 수정
 - `Refactor`: 코드 구조 개선
-- `Docs`: README 및 스크린샷 등 문서 작업
+- `Docs`: README 및 스크린샷 작업
 - `Test`: 기능 테스트 및 검증 기록
 - `Data`: 퀴즈 데이터 변경
 - `Chore`: 프로젝트 초기 설정 및 관리
@@ -354,6 +342,83 @@ git log --all --oneline
 - `Refactor: organize game features into QuizGame class`
 - `Docs: update README with bonus features`
 
-GitHub 원격 저장소는 `origin`으로 등록했고, 기능 개발 후 `git push origin main`으로 변경 사항을 업로드했습니다.
+## 12. Git 작업 증빙
 
-브랜치 작업에서는 `feature/quiz-play`에서 기능을 구현한 뒤 `main`에 Fast-forward 방식으로 병합했습니다. GitHub 초기 커밋은 별도의 병합 커밋으로 통합했습니다.
+### 1) 원격 저장소 및 커밋 기록
+
+원격 저장소: https://github.com/hats0601-dev/E1-2.git
+
+2026년 11월 3일 기준, 총 28개의 커밋을 작성했습니다.
+
+검증 명령어:
+
+```powershell
+git rev-list --count HEAD
+git log --all --oneline
+```
+
+실제 커밋 기록 일부:
+
+```text
+a914a9d Docs: add Git evidence logs and JSON design rationale
+8aa3e53 Docs: address AI evaluation feedback and add performance test
+54352dc Test: record quiz play with hint penalty
+2d736e2 Docs: add bonus feature screenshots
+dd638d0 Docs: update README with bonus features
+50b30aa Feat: save and display quiz score history
+49cd42e Feat: implement quiz deletion with confirmation
+7d9e2a6 Feat: implement quiz hints and score penalties
+1b5e27c Feat: allow users to select quiz question count
+92007db Feat: randomize quiz question order
+```
+
+전체 증빙:
+
+- [전체 커밋 로그](git-commits.txt)
+- [Git 커밋 스크린샷](screenshots/git-log.png)
+
+### 2) 브랜치 생성 및 병합
+
+`feature/quiz-play` 브랜치에서 퀴즈 풀이 기능을 구현한 후 `main`에 Fast-forward 방식으로 병합했습니다.
+
+GitHub 초기 커밋 통합 과정에서는 실제 병합 커밋이 생성됐습니다.
+
+```text
+f692a52 Merge: integrate GitHub initial commit
+```
+
+검증 명령어:
+
+```powershell
+git log --all --graph --oneline --decorate
+git log --all --merges --oneline
+```
+
+전체 증빙:
+
+- [브랜치 및 병합 그래프 로그](git-graph.txt)
+- [브랜치 및 병합 그래프 스크린샷](screenshots/git-branch-merge.png)
+
+### 3) Git Clone/Pull 검증
+
+GitHub 저장소를 별도 `E1-2-evaluation` 폴더에 복제한 후 `git pull origin main`으로 최신 변경 사항을 가져왔습니다.
+
+실제 확인 결과:
+
+```text
+Clone verification:
+https://github.com/hats0601-dev/E1-2.git
+
+Pull verification:
+## main...origin/main
+
+Latest commit:
+8aa3e53 Docs: address AI evaluation feedback and add performance test
+```
+
+검증 당시 최신 커밋은 `8aa3e53`이었으며, 이후 문서 증빙 보완 커밋이 추가됐습니다.
+
+전체 증빙:
+
+- [Clone/Pull 검증 로그](git-clone-pull.txt)
+- [Clone/Pull 실행 스크린샷](screenshots/git-clone-pull.png)
