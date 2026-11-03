@@ -1,6 +1,7 @@
 from quiz_data import get_default_quizzes
 from quiz import Quiz
 from quiz_data import get_default_quizzes
+from storage import load_state, save_state
 
 def show_menu():
     print("\n========================================")
@@ -114,8 +115,7 @@ def show_best_score(best_score):
         print(f"\n최고 점수: {best_score}점")
 
 def main():
-    quizzes = get_default_quizzes()
-    best_score = None
+    quizzes, best_score = load_state()
 
     try:
         while True:
@@ -124,18 +124,26 @@ def main():
 
             if number == 1:
                 best_score = play_quiz(quizzes, best_score)
+                save_state(quizzes, best_score)
+
             elif number == 2:
                 add_quiz(quizzes)
+                save_state(quizzes, best_score)
+
             elif number == 3:
                 show_quiz_list(quizzes)
+
             elif number == 4:
                 show_best_score(best_score)
+
             elif number == 5:
+                save_state(quizzes, best_score)
                 print("게임을 종료합니다.")
                 break
 
     except (KeyboardInterrupt, EOFError):
-        print("\n안전하게 게임을 종료합니다.")
+        save_state(quizzes, best_score)
+        print("\n데이터를 저장하고 안전하게 게임을 종료합니다.")
 
 
 if __name__ == "__main__":
