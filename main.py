@@ -34,10 +34,10 @@ def get_number(prompt, minimum, maximum):
         print(f"{minimum}~{maximum} 사이의 숫자를 입력하세요.")
 
 
-def play_quiz(quizzes):
+def play_quiz(quizzes, best_score):
     if not quizzes:
         print("등록된 퀴즈가 없습니다.")
-        return
+        return best_score
 
     score = 0
     total = len(quizzes)
@@ -61,6 +61,12 @@ def play_quiz(quizzes):
     print("\n========================================")
     print(f"결과: {total}문제 중 {score}문제 정답! ({percentage}점)")
     print("========================================")
+
+    if best_score is None or percentage > best_score:
+        best_score = percentage
+        print("새로운 최고 점수입니다!")
+
+    return best_score
 
 def add_quiz(quizzes):
     print("\n새로운 퀴즈를 추가합니다.")
@@ -101,8 +107,15 @@ def show_quiz_list(quizzes):
 
     print("----------------------------------------")
 
+def show_best_score(best_score):
+    if best_score is None:
+        print("\n아직 퀴즈를 풀지 않았습니다.")
+    else:
+        print(f"\n최고 점수: {best_score}점")
+
 def main():
     quizzes = get_default_quizzes()
+    best_score = None
 
     try:
         while True:
@@ -110,16 +123,16 @@ def main():
             number = get_number("선택: ", 1, 5)
 
             if number == 1:
-                play_quiz(quizzes)
+                best_score = play_quiz(quizzes, best_score)
             elif number == 2:
                 add_quiz(quizzes)
             elif number == 3:
                 show_quiz_list(quizzes)
+            elif number == 4:
+                show_best_score(best_score)
             elif number == 5:
                 print("게임을 종료합니다.")
                 break
-            else:
-                print(f"{number}번 기능은 구현 예정입니다.")
 
     except (KeyboardInterrupt, EOFError):
         print("\n안전하게 게임을 종료합니다.")
