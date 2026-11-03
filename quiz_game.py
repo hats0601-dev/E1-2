@@ -1,6 +1,7 @@
 from quiz_data import get_default_quizzes
 from storage import load_state, save_state
 from quiz import Quiz
+import random
 
 class QuizGame:
     def __init__(self):
@@ -49,7 +50,9 @@ class QuizGame:
 
         print(f"\n퀴즈를 시작합니다! (총 {total}문제)")
 
-        for index, quiz in enumerate(self.quizzes, start=1):
+        shuffled_quizzes = random.sample(self.quizzes, len(self.quizzes))
+
+        for index, quiz in enumerate(shuffled_quizzes, start=1):
             print(f"\n---------- 문제 {index} ----------")
             quiz.display()
 
