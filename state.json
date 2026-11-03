@@ -79,7 +79,17 @@
                 "break"
             ],
             "answer": 4
+        },
+        {
+            "question": "Python에서 리스트의 길이를 구하는 함수는?",
+            "choices": [
+                "print",
+                "len",
+                "input",
+                "type"
+            ],
+            "answer": 2
         }
     ],
-    "best_score": 80
+    "best_score": 100
 }
