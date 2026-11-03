@@ -134,3 +134,5 @@ python-quiz-game/
 ## 9. GitHub
 
 https://github.com/hats0601-dev/E1-2
+## 10. Git Clone 검증
+GitHub 저장소를 별도 폴더에 복제하고 프로그램이 정상 실행되는 것을 확인했습니다.
