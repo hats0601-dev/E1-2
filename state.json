@@ -8,7 +8,8 @@
                 "bool",
                 "list"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "소수점이 없는 숫자를 나타냅니다."
         },
         {
             "question": "Python에서 문자열을 나타내는 자료형은?",
@@ -18,7 +19,8 @@
                 "dict",
                 "bool"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "따옴표로 감싼 텍스트와 관련이 있습니다."
         },
         {
             "question": "Python에서 참(True)과 거짓(False)을 나타내는 자료형은?",
@@ -28,7 +30,8 @@
                 "bool",
                 "int"
             ],
-            "answer": 3
+            "answer": 3,
+            "hint": "논리값을 나타내는 자료형입니다."
         },
         {
             "question": "Python에서 여러 값을 순서대로 저장하는 자료형은?",
@@ -38,7 +41,8 @@
                 "list",
                 "int"
             ],
-            "answer": 3
+            "answer": 3,
+            "hint": "여러 값을 순서대로 저장할 때 사용합니다."
         },
         {
             "question": "Python에서 키(key)와 값(value)의 쌍으로 데이터를 저장하는 자료형은?",
@@ -48,7 +52,8 @@
                 "int",
                 "dict"
             ],
-            "answer": 4
+            "answer": 4,
+            "hint": "키와 값을 연결해서 저장합니다."
         },
         {
             "question": "Python에서 리스트를 생성하는 기호는? test1",
@@ -58,7 +63,8 @@
                 "{}",
                 "<>"
             ],
-            "answer": 3
+            "answer": 2,
+            "hint": "리스트의 시작과 끝을 감싸는 기호입니다."
         },
         {
             "question": "Python에서 주석을 작성할 때 사용하는 기호는? test2",
@@ -68,7 +74,8 @@
                 "--",
                 "**"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "코드 실행에 영향을 주지 않는 설명에 사용합니다."
         },
         {
             "question": "Python에서 반복문을 종료하는 키워드는? test3",
@@ -78,7 +85,8 @@
                 "pass",
                 "break"
             ],
-            "answer": 4
+            "answer": 4,
+            "hint": "반복을 즉시 중단할 때 사용합니다."
         },
         {
             "question": "Python에서 리스트의 길이를 구하는 함수는?",
@@ -88,7 +96,8 @@
                 "input",
                 "type"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "요소의 개수를 반환하는 내장 함수입니다."
         }
     ],
     "best_score": 100

@@ -52,6 +52,7 @@ class QuizGame:
         )
 
         score = 0
+        correct_count = 0
 
         print(f"\n퀴즈를 시작합니다! (총 {total}문제)")
 
@@ -61,18 +62,48 @@ class QuizGame:
             print(f"\n---------- 문제 {index} ----------")
             quiz.display()
 
-            answer = self.get_number("정답 입력 (1~4): ", 1, 4)
+            used_hint = False
+
+            while True:
+                value = input("정답 입력 (1~4, 힌트는 h): ").strip().lower()
+
+                if value == "h":
+                    if used_hint:
+                        print("이미 힌트를 확인했습니다.")
+                    elif not quiz.hint:
+                        print("이 문제에는 등록된 힌트가 없습니다.")
+                    else:
+                        quiz.show_hint()
+                        used_hint = True
+                    continue
+
+                if not value:
+                    print("입력값이 비어 있습니다. 다시 입력하세요.")
+                    continue
+
+                try:
+                    answer = int(value)
+                except ValueError:
+                    print("1~4 사이의 숫자 또는 h를 입력하세요.")
+                    continue
+
+                if 1 <= answer <= 4:
+                    break
+
+                print("1~4 사이의 숫자를 입력하세요.")
 
             if quiz.check_answer(answer):
-                print("정답입니다!")
-                score += 1
+                correct_count += 1
+                earned = 0.5 if used_hint else 1
+                score += earned
+                print(f"정답입니다! (+{earned:g}점)")
             else:
                 print(f"오답입니다! 정답은 {quiz.answer}번입니다.")
 
         percentage = round(score / total * 100)
 
         print("\n========================================")
-        print(f"결과: {total}문제 중 {score}문제 정답! ({percentage}점)")
+        print(f"결과: {total}문제 중 {correct_count}문제 정답! ({percentage}점)")
         print("========================================")
 
         if self.best_score is None or percentage > self.best_score:
@@ -106,7 +137,9 @@ class QuizGame:
 
         answer = self.get_number("정답 번호 (1~4): ", 1, 4)
 
-        self.quizzes.append(Quiz(question, choices, answer))
+        hint = input("힌트를 입력하세요 (생략 가능): ").strip()
+
+        self.quizzes.append(Quiz(question, choices, answer, hint))
 
         self.save()
         print("퀴즈가 추가되었습니다!")

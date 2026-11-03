@@ -12,7 +12,8 @@ def save_state(quizzes, best_score):
             {
                 "question": quiz.question,
                 "choices": quiz.choices,
-                "answer": quiz.answer
+                "answer": quiz.answer,
+                "hint": quiz.hint
             }
             for quiz in quizzes
         ],
@@ -58,6 +59,10 @@ def load_state():
             question = item["question"]
             choices = item["choices"]
             answer = item["answer"]
+            hint = item.get("hint", "")
+
+            if not isinstance(hint, str):
+                raise ValueError("힌트 데이터가 올바르지 않습니다.")
 
             if (
                 not isinstance(question, str)
@@ -73,7 +78,7 @@ def load_state():
             ):
                 raise ValueError("퀴즈 데이터가 올바르지 않습니다.")
 
-            quizzes.append(Quiz(question, choices, answer))
+            quizzes.append(Quiz(question, choices, answer, hint))
 
         print(f"저장된 데이터를 불러왔습니다. (퀴즈 {len(quizzes)}개)")
         return quizzes, best_score
