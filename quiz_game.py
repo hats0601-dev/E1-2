@@ -45,12 +45,17 @@ class QuizGame:
             print("등록된 퀴즈가 없습니다.")
             return
 
+        total = self.get_number(
+            f"몇 문제를 푸시겠습니까? (1~{len(self.quizzes)}): ",
+            1,
+            len(self.quizzes)
+        )
+
         score = 0
-        total = len(self.quizzes)
 
         print(f"\n퀴즈를 시작합니다! (총 {total}문제)")
 
-        shuffled_quizzes = random.sample(self.quizzes, len(self.quizzes))
+        shuffled_quizzes = random.sample(self.quizzes, total)
 
         for index, quiz in enumerate(shuffled_quizzes, start=1):
             print(f"\n---------- 문제 {index} ----------")
