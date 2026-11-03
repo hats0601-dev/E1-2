@@ -6,7 +6,9 @@ from quiz_data import get_default_quizzes
 STATE_FILE = Path(__file__).resolve().parent / "state.json"
 
 
-def save_state(quizzes, best_score):
+def save_state(quizzes, best_score, history=None):
+    if history is None:
+        history = []
     data = {
         "quizzes": [
             {
@@ -17,7 +19,8 @@ def save_state(quizzes, best_score):
             }
             for quiz in quizzes
         ],
-        "best_score": best_score
+        "best_score": best_score,
+        "history": history
     }
 
     try:
@@ -44,6 +47,10 @@ def load_state():
 
         quiz_data = data["quizzes"]
         best_score = data["best_score"]
+        history = data.get("history", [])
+
+        if not isinstance(history, list):
+            raise ValueError("점수 기록 형식이 올바르지 않습니다.")
 
         if not isinstance(quiz_data, list):
             raise ValueError("퀴즈 목록 형식이 올바르지 않습니다.")
@@ -87,3 +94,22 @@ def load_state():
         print(f"저장 파일 오류: {error}")
         print("기본 퀴즈 데이터로 복구합니다.")
         return get_default_quizzes(), None
+
+def load_history():
+    if not STATE_FILE.exists():
+        return []
+
+    try:
+        with open(STATE_FILE, "r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        history = data.get("history", [])
+
+        if not isinstance(history, list):
+            raise ValueError("점수 기록 형식이 올바르지 않습니다.")
+
+        return history
+
+    except (OSError, UnicodeError, ValueError, TypeError, AttributeError) as error:
+        print(f"점수 기록을 불러오지 못했습니다: {error}")
+        return []

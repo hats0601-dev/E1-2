@@ -2,13 +2,15 @@ from quiz_data import get_default_quizzes
 from storage import load_state, save_state
 from quiz import Quiz
 import random
+from datetime import datetime
+from storage import load_history
 
 class QuizGame:
     def __init__(self):
         self.quizzes, self.best_score = load_state()
-
+        self.history = load_history()
     def save(self):
-        return save_state(self.quizzes, self.best_score)
+        return save_state(self.quizzes, self.best_score, self.history)
 
     def show_menu(self):
         print("\n========================================")
@@ -20,6 +22,7 @@ class QuizGame:
         print("4. 점수 확인")
         print("5. 종료")
         print("6. 퀴즈 삭제")
+        print("7. 점수 기록 조회")
         print("========================================")
 
     def get_number(self, prompt, minimum, maximum):
@@ -110,7 +113,14 @@ class QuizGame:
         if self.best_score is None or percentage > self.best_score:
             self.best_score = percentage
             print("새로운 최고 점수입니다!")
+        record = {
+            "datetime": datetime.now().isoformat(timespec="seconds"),
+            "total_questions": total,
+            "correct_answers": correct_count,
+            "score": percentage
+        }
 
+        self.history.append(record)
         self.save()
 
     def add_quiz(self):
@@ -195,12 +205,29 @@ class QuizGame:
             self.quizzes.insert(number - 1, removed_quiz)
             print("저장에 실패하여 삭제를 취소했습니다.")
 
+    def show_history(self):
+        if not self.history:
+            print("\n저장된 게임 기록이 없습니다.")
+            return
+
+        print(f"\n게임 기록 (총 {len(self.history)}회)")
+        print("----------------------------------------")
+
+        for number, record in enumerate(self.history, start=1):
+            print(
+                f"{number}. {record['datetime']} | "
+                f"{record['total_questions']}문제 중 "
+                f"{record['correct_answers']}문제 정답 | "
+                f"{record['score']}점"
+            )
+
+        print("----------------------------------------")
 
     def run(self):
         try:
             while True:
                 self.show_menu()
-                number = self.get_number("선택: ", 1, 6)
+                number = self.get_number("선택: ", 1, 7)
 
                 if number == 1:
                     self.play_quiz()
@@ -222,6 +249,9 @@ class QuizGame:
                 elif number == 6:
                     self.delete_quiz()
 
+                elif number == 7:
+                    self.show_history()
+                    
         except (KeyboardInterrupt, EOFError):
             self.save()
             print("\n데이터를 저장하고 안전하게 게임을 종료합니다.")

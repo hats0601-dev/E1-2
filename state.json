@@ -100,5 +100,13 @@
             "hint": "요소의 개수를 반환하는 내장 함수입니다."
         }
     ],
-    "best_score": 100
+    "best_score": 100,
+    "history": [
+        {
+            "datetime": "2026-11-03T17:46:06",
+            "total_questions": 1,
+            "correct_answers": 0,
+            "score": 0
+        }
+    ]
 }
